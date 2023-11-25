@@ -11,7 +11,7 @@ import Exception.UserNotFound;
 @RestController
 @RequestMapping("/api/users")
 public class UserController{
-        // Autowired annotation is used for automatic injection of UserRepository dependency.
+        // '''Autowired annotation is used for automatic injection of UserRepository dependency.
         // This is a constructor-based dependency injection.
     private final UserRepository userRepository;
 @Autowired
