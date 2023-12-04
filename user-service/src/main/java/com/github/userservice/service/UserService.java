@@ -5,32 +5,36 @@ import com.github.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     @Autowired
-    private final UserRepository userRepository;
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    UserRepository userRepository;
+
+    public List<UserModel> getAllUser() {
+        return userRepository.findAll();
     }
 
-    public List<UserModel> ListarTodos() {
-       return userRepository.findAll();
+    public Optional<UserModel> getUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
-    public UserModel BuscarId(long id) {
-        return userRepository.findById(id);
+    public UserModel createUser(UserModel user) {
+        return userRepository.save(user);
     }
 
-    public void DeletarUsario(long id) {
-         userRepository.deleteById(id);
+    public UserModel updateUser(Long userId, UserModel updatedUser) {
+        return userRepository.findById(userId)
+                .map(user -> {
+                    user.setName(updatedUser.getName());
+                    user.setAge((updatedUser.getAge()));
+                    return userRepository.save(user);
+                })
+                .orElse(null);
     }
 
-    public UserModel AtualizarUsario(UserModel userModel) {
-        return userRepository.save(userModel);
-    }
-
-    public UserModel CriarUsuario(UserModel userModel) {
-        return userRepository.save(userModel);
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 }
