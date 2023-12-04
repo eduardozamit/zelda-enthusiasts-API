@@ -3,37 +3,46 @@ package com.github.userservice.controllers;
 import com.github.userservice.models.UserModel;
 import com.github.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/usuario")
+@RequestMapping("/users")
 public class UserController {
-    @Autowired
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    UserService userService;
 
     @GetMapping
-    public List<UserModel> ListarTodos() {
-        return userService.ListarTodos();
+    public ResponseEntity<List<UserModel>> getAllUsers() {
+        List<UserModel> users = userService.getAllUser();
+        return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserModel> getUserById(@PathVariable Long userId) {
+        return userService.getUserById(userId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public UserModel CriarUsuario(@RequestBody UserModel userModel) {
-        return userService.CriarUsuario(userModel);
+    public ResponseEntity<UserModel> creatUser(@RequestBody UserModel user) {
+        UserModel createdUser = userService.createUser(user);
+        return ResponseEntity.ok(createdUser);
     }
 
-    @PutMapping(path="/update/{id}")
-    public UserModel AtualizarUsario(@RequestBody UserModel userModel) {
-        return userService.AtualizarUsario(userModel);
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserModel> updateUser(@PathVariable Long userId, @RequestBody UserModel updatedUser) {
+        UserModel user = userService.updateUser(userId, updatedUser);
+        return (user != null) ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping(path="{id}")
-    public void DeletarUsario(@PathVariable long id) {
-        userService.DeletarUsario(id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.noContent().build();
     }
 }
