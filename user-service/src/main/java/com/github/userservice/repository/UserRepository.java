@@ -3,8 +3,8 @@ package com.github.userservice.repository;
 import com.github.userservice.models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<UserModel, Long> {
-    UserModel findById(long id);
+import java.util.Optional;
 
-    void deleteById(long id);
+public interface UserRepository extends JpaRepository<UserModel, Integer> {
+    public Optional<UserModel> findByLogin(String login);
 }
