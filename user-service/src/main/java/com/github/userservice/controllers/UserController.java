@@ -1,39 +1,30 @@
 package com.github.userservice.controllers;
 
 import com.github.userservice.models.UserModel;
-import com.github.userservice.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.userservice.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/usuario")
+@RequestMapping(path="/api/usuario")
 public class UserController {
-    @Autowired
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+     private final UserRepository repository;
+
+    public UserController(UserRepository repository) {
+        this.repository = repository;
     }
 
-    @GetMapping
-    public List<UserModel> ListarTodos() {
-        return userService.ListarTodos();
+    @GetMapping("/listarTodos")
+    public ResponseEntity<List<UserModel>> listarTodos() {
+        return ResponseEntity.ok(repository.findAll());
     }
 
-    @PostMapping
-    public UserModel CriarUsuario(@RequestBody UserModel userModel) {
-        return userService.CriarUsuario(userModel);
-    }
-
-    @PutMapping(path="/update/{id}")
-    public UserModel AtualizarUsario(@RequestBody UserModel userModel) {
-        return userService.AtualizarUsario(userModel);
-    }
-
-    @DeleteMapping(path="{id}")
-    public void DeletarUsario(@PathVariable long id) {
-        userService.DeletarUsario(id);
+    @PostMapping("/salvar")
+    public ResponseEntity<UserModel> salvar(@RequestBody UserModel usuario) {
+        return ResponseEntity.ok(repository.save(usuario));
     }
 }
+
