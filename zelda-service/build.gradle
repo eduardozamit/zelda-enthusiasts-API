@@ -22,16 +22,10 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.1.0'
-    implementation 'org.springframework.roo:org.springframework.roo.addon.security:2.0.0.RELEASE'
-	implementation 'org.springframework.roo:org.springframework.roo.addon.security:2.0.0.RELEASE'
-	implementation 'org.springframework.roo:org.springframework.roo.addon.security:2.0.0.RELEASE'
-    implementation 'top.dcenter:justAuth-spring-security-starter:1.1.25'
-    compileOnly 'org.projectlombok:lombok:1.18.26'
-	annotationProcessor 'org.projectlombok:lombok:1.18.26'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux:3.0.4'
-	testImplementation 'io.projectreactor:reactor-test:3.5.4'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
