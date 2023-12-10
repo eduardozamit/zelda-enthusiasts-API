@@ -2,8 +2,10 @@ package com.github.userservice.controllers;
 
 import com.github.userservice.models.UserModel;
 import com.github.userservice.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserModel>> getAllUsers() {
-        List<UserModel> users = userService.getAllUser();
+        List<UserModel> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
@@ -29,7 +31,11 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserModel> creatUser(@RequestBody UserModel user) {
+    public ResponseEntity<UserModel> createUser(@Valid @RequestBody UserModel user, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
         UserModel createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
