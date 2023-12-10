@@ -2,11 +2,9 @@ package com.github.zeldaservice.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class ZeldaGameResponse {
+public class ZeldaGameResponse<T> {
     private boolean success;
     private int count;
-    private List<ZeldaGame> data;
+    private T data;
 }
