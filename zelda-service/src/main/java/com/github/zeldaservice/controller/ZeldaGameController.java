@@ -19,11 +19,13 @@ public class ZeldaGameController {
 
     private final ZeldaGameService zeldaGameService;
 
+    // Endpoint para obter todos os jogos
     @GetMapping
     public Mono<ZeldaGameResponse<List<ZeldaGame>>> getAllGames() {
         return zeldaGameService.getAllGames();
     }
 
+    // Endpoint para obter um jogo por ID
     @GetMapping("/{id}")
     public Mono<ZeldaGameResponse<ZeldaGame>> getGameById(@PathVariable String id) {
         return zeldaGameService.getGameById(id);

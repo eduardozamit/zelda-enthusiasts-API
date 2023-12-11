@@ -12,6 +12,7 @@ public class ZeldaServiceApplication {
 		SpringApplication.run(ZeldaServiceApplication.class, args);
 	}
 
+	// Bean para configurar o WebClient usado nos serviços
 	@Bean
 	public WebClient webClient() {
 		return WebClient.create();
