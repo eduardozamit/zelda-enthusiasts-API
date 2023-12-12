@@ -1,10 +1,9 @@
 package com.github.userservice.repository;
 
-import com.github.userservice.models.UserModel;
+import com.github.userservice.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Optional;
-
-public interface UserRepository extends JpaRepository<UserModel, Integer> {
-    public Optional<UserModel> findByLogin(String login);
+public interface UserRepository extends JpaRepository<User, String> {
+    UserDetails findByLogin(String login);
 }
