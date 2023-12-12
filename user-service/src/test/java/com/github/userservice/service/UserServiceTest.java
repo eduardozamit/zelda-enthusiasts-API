@@ -39,7 +39,7 @@ public class UserServiceTest {
         when(userRepository.findAll()).thenReturn(userList);
 
         // Act
-        List<UserModel> result = userService.getAllUser();
+        List<UserModel> result = userService.getAllUsers();
 
         // Assert
         assertEquals(userList, result);
