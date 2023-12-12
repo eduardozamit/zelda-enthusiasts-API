@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +26,13 @@ public class UserModel {
     @NotNull(message = "A idade não pode ser nula")
     @Positive(message = "A idade deve ser um número positivo")
     private int age;
+
+    @ManyToMany
+    @JoinTable(name = "favoritegame",
+            joinColumn = @JoinColumn(name = "user_id",
+                    inverseJoinColumn = @JoinColumn(name = "zelda_id")))
+    private List<ZeldaModel> favoriteGames;
+
 }
 
 

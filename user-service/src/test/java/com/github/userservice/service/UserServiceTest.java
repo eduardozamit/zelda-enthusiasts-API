@@ -1,13 +1,11 @@
 package com.github.userservice.service;
 
 import com.github.userservice.models.UserModel;
-import com.github.userservice.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.matchers.Null;
 
 import java.util.Arrays;
 import java.util.List;
