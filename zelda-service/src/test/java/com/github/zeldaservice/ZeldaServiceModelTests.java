@@ -42,7 +42,8 @@ class ZeldaGameTests {
 
         List<ZeldaGame> gameList = Arrays.asList(game);
 
-        ZeldaGameResponse response = new ZeldaGameResponse();
+        // Ajustado para utilizar a classe correta
+        ZeldaGameResponse<List<ZeldaGame>> response = new ZeldaGameResponse<>();
         response.setSuccess(true);
         response.setCount(1);
         response.setData(gameList);
